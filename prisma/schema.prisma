@@ -13,22 +13,25 @@ datasource db {
 }
 
 model User {
-  user_id  Int     @id @default(autoincrement())
-  username String  @unique
-  email    String  @unique
+  user_id  Int      @id @default(autoincrement())
+  username String   @unique
+  email    String   @unique
   password String
-  isActive Boolean @default(false)
-  Rol String
+  isActive Boolean  @default(false)
+  Rol      String
+  profile  Profile?
 }
 
 model Profile {
-  user_id Int @id @default(autoincrement())
-  Nombre  String
-  Apellido String
-  Peso Decimal
-  Altura Decimal
-  Edad Int
-  Birtgday DateTime
+  profile_id     Int      @id @default(autoincrement())
+  Nombre         String
+  Apellido       String
+  Peso           Decimal
+  Altura         Decimal
+  Edad           Int
+  Birtgday       DateTime
   profilePicture String
-  Nationality String
+  Nationality    String
+  user_id        Int      @unique
+  user           User     @relation(fields: [user_id], references: [user_id])
 }
